@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MB STUDIO - Imagen & Estilo</title>
+    
+    <link rel="icon" type="image/png" href="assets/img/logo.png">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        gold: '#D4AF37',
+                        goldDark: '#AA8C2C',
+                        dark: '#0a0a0a',
+                        darker: '#050505',
+                        neon: '#00ffcc', 
+                    },
+                    fontFamily: {
+                        display: ['Oswald', 'sans-serif'],
+                        sans: ['Roboto', 'sans-serif'],
+                    },
+                    animation: {
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Scrollbar Personalizado */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050505; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333; 
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D4AF37; 
+        }
+
+        /* Clase para ocultar elementos antes de la animación */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Ajuste para inputs de fecha */
+        ::-webkit-calendar-picker-indicator {
+            filter: invert(1);
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-dark text-white overflow-x-hidden selection:bg-gold selection:text-black">
+
+    <nav class="fixed w-full z-50 bg-darker/80 backdrop-blur-md border-b border-white/5 transition-all duration-300 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="assets/img/logo.png" alt="Logo MB Studio" class="h-10 w-auto object-contain transition duration-300 transform group-hover:scale-110 drop-shadow-[0_0_5px_rgba(255,255,255,0.2)]">
+                
+                <h1 class="text-2xl font-display font-bold tracking-wider text-white">
+                    MB <span class="text-gold transition duration-300 group-hover:text-white group-hover:shadow-glow">STUDIO</span>
+                </h1>
+            </a>
+
+            <a href="#reservas" class="hidden md:inline-block bg-gradient-to-r from-gold to-goldDark text-black px-6 py-2 font-bold font-display uppercase tracking-widest hover:text-white hover:from-black hover:to-gray-900 border border-transparent hover:border-gold transition-all duration-300 shadow-[0_0_15px_rgba(212,175,55,0.4)] rounded-sm">
+                Agendar Turno
+            </a>
+            <a href="#reservas" class="md:hidden text-gold text-2xl"><i class="fas fa-calendar-check"></i></a>
+        </div>
+    </nav>
+
+    <header class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0" style="background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; filter: brightness(0.3);"></div>
+        
+        <div class="relative z-10 text-center px-4 max-w-4xl">
+            <p class="text-gold font-display tracking-[0.5em] uppercase mb-4 text-xs md:text-sm animate-fade-in-up opacity-80">Estilo & Imagen</p>
+            
+            <h2 class="text-6xl md:text-9xl font-display font-bold text-white mb-6 uppercase tracking-tighter leading-none shadow-black drop-shadow-2xl">
+                MB <span class="text-transparent bg-clip-text bg-gradient-to-b from-gold via-yellow-200 to-goldDark">STUDIO</span>
+            </h2>
+            
+            <p class="text-gray-300 max-w-lg mx-auto mb-12 text-lg font-light leading-relaxed">
+                Elevamos tu imagen con cortes de precisión y un servicio que respeta tu tiempo.
+            </p>
+            
+            <div class="flex flex-col md:flex-row gap-4 justify-center items-center">
+                <a href="#reservas" class="animate-float inline-block bg-gold text-black px-12 py-4 font-display text-lg uppercase tracking-widest font-bold hover:bg-white transition duration-300 shadow-[0_0_20px_rgba(212,175,55,0.6)] rounded-sm">
+                    Reservar Ahora
+                </a>
+                <a href="#servicios" class="inline-block border border-white/30 text-white px-12 py-4 font-display text-lg uppercase tracking-widest hover:bg-white hover:text-black transition duration-300 rounded-sm backdrop-blur-sm">
+                    Ver Servicios
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 animate-bounce text-white/50">
+            <i class="fas fa-chevron-down text-2xl"></i>
+        </div>
+    </header>
+
+    <section id="servicios" class="py-24 bg-darker relative">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16 reveal">
+                <h3 class="text-4xl md:text-5xl font-display uppercase tracking-wide text-white">Nuestros <span class="text-gold border-b-2 border-gold pb-1">Cortes</span></h3>
+                <p class="mt-4 text-neon text-sm font-bold tracking-widest uppercase animate-pulse-slow">★ Cejas Gratis con cualquier servicio ★</p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-dark p-8 border-l-4 border-gold hover:bg-white/5 transition duration-300 reveal group cursor-default shadow-lg">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h4 class="text-2xl font-display text-white group-hover:text-gold transition">Corte Clásico</h4>
+                        <span class="text-2xl text-gold font-bold">25.000 Gs</span>
+                    </div>
+                    <p class="text-gray-500 text-sm font-light group-hover:text-gray-300 transition">Estilo atemporal. Incluye lavado y peinado final.</p>
+                </div>
+
+                <div class="bg-dark p-8 border-l-4 border-white hover:border-gold hover:bg-white/5 transition duration-300 reveal group cursor-default shadow-lg relative overflow-hidden">
+                    <div class="absolute top-0 right-0 bg-gold text-black text-[10px] font-bold px-3 py-1 uppercase">Top Seller</div>
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h4 class="text-2xl font-display text-white group-hover:text-gold transition">Corte Personalizado</h4>
+                        <span class="text-2xl text-gold font-bold">30.000 Gs</span>
+                    </div>
+                    <p class="text-gray-500 text-sm font-light group-hover:text-gray-300 transition">Fades, degradados complejos y diseños de autor.</p>
+                </div>
+
+                <div class="bg-dark p-8 border-l-4 border-white hover:border-gold hover:bg-white/5 transition duration-300 reveal group cursor-default shadow-lg">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h4 class="text-2xl font-display text-white group-hover:text-gold transition">Ritual de Barba</h4>
+                        <span class="text-2xl text-gold font-bold">25.000 Gs</span>
+                    </div>
+                    <p class="text-gray-500 text-sm font-light group-hover:text-gray-300 transition">Experiencia premium.</p>
+                </div>
+
+                <div class="bg-dark p-8 border-l-4 border-white hover:border-gold hover:bg-white/5 transition duration-300 reveal group cursor-default shadow-lg">
+                    <div class="flex justify-between items-baseline mb-2">
+                        <h4 class="text-2xl font-display text-white group-hover:text-gold transition">Marcado de Barba</h4>
+                        <span class="text-2xl text-gold font-bold">5.000 Gs</span>
+                    </div>
+                    <p class="text-gray-500 text-sm font-light group-hover:text-gray-300 transition">Mantenimiento rápido de contornos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-black">
+        <div class="max-w-6xl mx-auto px-4 mb-12 text-center reveal">
+            <h3 class="text-4xl md:text-5xl font-display uppercase text-white tracking-widest">
+                NUESTROS <span class="text-gold">RESULTADOS</span>
+            </h3>
+            <p class="text-gray-400 mt-4 text-sm font-light tracking-widest uppercase border-t border-white/10 inline-block pt-4 px-8">
+                La precisión es nuestra firma
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-4">
+            <div class="relative group overflow-hidden h-80">
+                <img src="assets/img/image1.jpeg" loading="lazy" class="w-full h-full object-cover transition duration-700 transform group-hover:scale-110 grayscale group-hover:grayscale-0">
+                <div class="absolute inset-0 bg-gold/20 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"></div>
+            </div>
+            <div class="relative group overflow-hidden h-80">
+                <img src="assets/img/image2.jpeg" loading="lazy" class="w-full h-full object-cover transition duration-700 transform group-hover:scale-110 grayscale group-hover:grayscale-0">
+                <div class="absolute inset-0 bg-gold/20 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"></div>
+            </div>
+            <div class="relative group overflow-hidden h-80">
+                <img src="assets/img/image3.jpeg" loading="lazy" class="w-full h-full object-cover transition duration-700 transform group-hover:scale-110 grayscale group-hover:grayscale-0">
+                <div class="absolute inset-0 bg-gold/20 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"></div>
+            </div>
+            <div class="relative group overflow-hidden h-80">
+                <img src="assets/img/image4.jpeg" loading="lazy" class="w-full h-full object-cover transition duration-700 transform group-hover:scale-110 grayscale group-hover:grayscale-0">
+                <div class="absolute inset-0 bg-gold/20 opacity-0 group-hover:opacity-100 transition duration-300 pointer-events-none"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-darker border-b border-white/5">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <i class="fas fa-crown text-gold text-3xl mb-8 animate-pulse"></i>
+            <h3 class="text-3xl font-display text-white mb-10 reveal tracking-wider">EL PRESTIGIO SE GANA</h3>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-gradient-to-br from-dark to-black p-6 border border-white/5 reveal hover:-translate-y-2 transition duration-300 shadow-xl">
+                    <div class="flex justify-center text-gold mb-4 text-xs">★★★★★</div>
+                    <p class="text-gray-400 text-sm italic mb-4 leading-relaxed">"Es demasiado bueno el precio y la atención al cliente de Mauri es excelente."</p>
+                    <p class="text-white font-bold font-display uppercase text-xs tracking-widest">Donovan.</p>
+                </div>
+                <div class="bg-gradient-to-br from-dark to-black p-6 border border-white/5 reveal hover:-translate-y-2 transition duration-300 shadow-xl">
+                    <div class="flex justify-center text-gold mb-4 text-xs">★★★★★</div>
+                    <p class="text-gray-400 text-sm italic mb-4 leading-relaxed">"Realmente no pense que sería tan bueno, vine desde Asunción por recomendación de un amigo y quede impresionado, valio la pena el viaje y volveré todos los meses."</p>
+                    <p class="text-white font-bold font-display uppercase text-xs tracking-widest">Agustin.</p>
+                </div>
+                <div class="bg-gradient-to-br from-dark to-black p-6 border border-white/5 reveal hover:-translate-y-2 transition duration-300 shadow-xl">
+                    <div class="flex justify-center text-gold mb-4 text-xs">★★★★★</div>
+                    <p class="text-gray-400 text-sm italic mb-4 leading-relaxed">"Lo conocí en el colegio como un compañero y se volvió mi barbero favorito, recomendadisimo."</p>
+                    <p class="text-white font-bold font-display uppercase text-xs tracking-widest">Rubén.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reservas" class="py-24 bg-dark relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-20"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-gold opacity-5 rounded-full blur-[100px]"></div>
+
+        <div class="max-w-2xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-10 reveal">
+                <h3 class="text-5xl font-display uppercase text-white mb-2">Reserva <span class="text-gold">Online</span></h3>
+                <p class="text-gray-500 font-light">Asegura tu lugar en segundos. Sin llamadas, sin esperas.</p>
+            </div>
+
+            <div class="bg-black/40 backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-xl shadow-2xl reveal">
+                
+                <div class="mb-6 group">
+                    <label class="block text-gray-400 text-xs font-bold mb-2 uppercase tracking-widest group-hover:text-gold transition">1. Elige el Servicio</label>
+                    <div class="relative">
+                        <select id="servicioSelect" class="w-full bg-darker border-b border-gray-700 text-white p-4 focus:outline-none focus:border-gold transition appearance-none cursor-pointer hover:bg-white/5">
+                            <option value="Corte Clásico - 25.000 Gs">Corte Clásico (25.000 Gs)</option>
+                            <option value="Corte Personalizado - 30.000 Gs">Corte Personalizado (30.000 Gs)</option>
+                            <option value="Ritual de Barba - 25.000 Gs">Ritual de Barba (25.000 Gs)</option>
+                            <option value="Marcado de Barba - 5.000 Gs">Marcado de Barba (5.000 Gs)</option>
+                        </select>
+                        <div class="absolute right-4 top-4 text-gold pointer-events-none"><i class="fas fa-chevron-down"></i></div>
+                    </div>
+                </div>
+
+                <div class="mb-6 group">
+                    <label class="block text-gray-400 text-xs font-bold mb-2 uppercase tracking-widest group-hover:text-gold transition">2. Selecciona Fecha</label>
+                    <input type="date" id="fechaInput" class="w-full bg-darker border-b border-gray-700 text-white p-4 focus:outline-none focus:border-gold transition scheme-dark hover:bg-white/5 uppercase">
+                </div>
+
+                <div class="mb-8">
+                    <label class="block text-gray-400 text-xs font-bold mb-4 uppercase tracking-widest">3. Horarios Disponibles</label>
+                    <div id="horariosGrid" class="grid grid-cols-3 md:grid-cols-4 gap-3 text-center">
+                        <div class="col-span-full py-6 border border-dashed border-gray-800 text-gray-600 rounded">
+                            <i class="far fa-calendar-alt mb-2 text-xl"></i><br>
+                            Selecciona una fecha arriba
+                        </div>
+                    </div>
+                    <input type="hidden" id="horaSeleccionada">
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-8">
+                    <div class="group">
+                        <label class="block text-gray-500 text-xs mb-2 uppercase tracking-wider group-hover:text-gold transition">Tu Nombre</label>
+                        <input type="text" id="nombreInput" placeholder="Ej: Eric Alvarez" class="w-full bg-transparent border-b border-gray-700 text-white pb-2 focus:border-gold outline-none transition placeholder-gray-700 text-lg">
+                    </div>
+                    <div class="group">
+                        <label class="block text-gray-500 text-xs mb-2 uppercase tracking-wider group-hover:text-gold transition">Tu WhatsApp</label>
+                        <input type="tel" id="telefonoInput" placeholder="Ej: 0981..." class="w-full bg-transparent border-b border-gray-700 text-white pb-2 focus:border-gold outline-none transition placeholder-gray-700 text-lg">
+                    </div>
+                </div>
+
+                <button onclick="confirmarReserva()" class="w-full bg-gold text-black font-display font-bold text-xl py-5 uppercase tracking-[0.2em] hover:bg-white hover:scale-[1.02] transition-all duration-300 shadow-[0_4px_20px_rgba(212,175,55,0.3)] relative overflow-hidden group rounded-sm">
+                    Confirmar Cita
+                </button>
+                
+                <p id="mensajeEstado" class="text-center mt-4 text-sm font-bold text-gold h-6 tracking-wide"></p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-black border-t border-white/10 py-16">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-10">
+            <div class="text-center md:text-left">
+                <h2 class="text-3xl font-display font-bold text-white mb-2 tracking-widest">MB <span class="text-gold">STUDIO</span></h2>
+                <p class="text-gray-500 text-sm">Capiatá, Paraguay</p>
+                <p class="text-gray-500 text-sm mt-1">Especialistas en Imagen Masculina.</p>
+            </div>
+
+            <div class="flex gap-8">
+    <a href="https://www.instagram.com/mb.barberstudio_?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="w-12 h-12 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white hover:border-white transition duration-300">
+        <i class="fab fa-instagram text-xl"></i>
+    </a>
+    
+    <a href="https://wa.me/595983114266" target="_blank" class="w-12 h-12 rounded-full border border-gray-800 flex items-center justify-center text-gray-400 hover:text-black hover:bg-green-500 hover:border-green-500 transition duration-300">
+        <i class="fab fa-whatsapp text-xl"></i>
+    </a>
+</div>
+        </div>
+        
+        <div class="border-t border-white/5 mt-16 pt-8 text-center">
+            <p class="text-gray-700 text-xs tracking-widest uppercase">
+                &copy; 2026 MB Studio. 
+                <span class="mx-2 text-gold">•</span> 
+                Asesoria de Marketing & Creación Web made by <span class="text-white font-bold">Eric Alvarez</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="js/db-config.js"></script> 
+    <script src="js/booking.js"></script>   
+    <script src="js/main.js"></script>      
+</body>
+</html>
