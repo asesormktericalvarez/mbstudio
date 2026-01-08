@@ -9,8 +9,6 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <script>
         tailwind.config = {
             theme: {
@@ -60,7 +58,6 @@
             background: #D4AF37; 
         }
 
-        /* Clase para ocultar elementos antes de la animación */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -69,12 +66,6 @@
         .reveal.active {
             opacity: 1;
             transform: translateY(0);
-        }
-        
-        /* Ajuste para inputs de fecha */
-        ::-webkit-calendar-picker-indicator {
-            filter: invert(1);
-            cursor: pointer;
         }
     </style>
 </head>
@@ -102,6 +93,11 @@
         <div class="absolute inset-0 z-0" style="background-image: url('https://images.unsplash.com/photo-1585747860715-2ba37e788b70?q=80&w=2074&auto=format&fit=crop'); background-size: cover; background-position: center; background-attachment: fixed; filter: brightness(0.3);"></div>
         
         <div class="relative z-10 text-center px-4 max-w-4xl">
+            
+            <a href="https://wa.me/595992901387" target="_blank" class="block mb-4 text-[10px] md:text-xs font-sans font-bold tracking-[0.2em] text-white/40 hover:text-gold transition-colors duration-300 uppercase cursor-pointer">
+                Web creada por Eric Alvarez
+            </a>
+            
             <p class="text-gold font-display tracking-[0.5em] uppercase mb-4 text-xs md:text-sm animate-fade-in-up opacity-80">Estilo & Imagen</p>
             
             <h2 class="text-6xl md:text-9xl font-display font-bold text-white mb-6 uppercase tracking-tighter leading-none shadow-black drop-shadow-2xl">
@@ -238,7 +234,7 @@
             <div class="bg-black/40 backdrop-blur-xl border border-white/10 p-8 md:p-10 rounded-xl shadow-2xl reveal">
                 
                 <div class="mb-6 group">
-                    <label class="block text-gray-400 text-xs font-bold mb-2 uppercase tracking-widest group-hover:text-gold transition">1. Elige el Servicio</label>
+                    <label class="block text-gray-400 text-xs font-bold mb-2 uppercase tracking-widest group-hover:text-gold transition">Elige el Servicio</label>
                     <div class="relative">
                         <select id="servicioSelect" class="w-full bg-darker border-b border-gray-700 text-white p-4 focus:outline-none focus:border-gold transition appearance-none cursor-pointer hover:bg-white/5">
                             <option value="Corte Clásico - 25.000 Gs">Corte Clásico (25.000 Gs)</option>
@@ -248,22 +244,6 @@
                         </select>
                         <div class="absolute right-4 top-4 text-gold pointer-events-none"><i class="fas fa-chevron-down"></i></div>
                     </div>
-                </div>
-
-                <div class="mb-6 group">
-                    <label class="block text-gray-400 text-xs font-bold mb-2 uppercase tracking-widest group-hover:text-gold transition">2. Selecciona Fecha</label>
-                    <input type="date" id="fechaInput" class="w-full bg-darker border-b border-gray-700 text-white p-4 focus:outline-none focus:border-gold transition scheme-dark hover:bg-white/5 uppercase">
-                </div>
-
-                <div class="mb-8">
-                    <label class="block text-gray-400 text-xs font-bold mb-4 uppercase tracking-widest">3. Horarios Disponibles</label>
-                    <div id="horariosGrid" class="grid grid-cols-3 md:grid-cols-4 gap-3 text-center">
-                        <div class="col-span-full py-6 border border-dashed border-gray-800 text-gray-600 rounded">
-                            <i class="far fa-calendar-alt mb-2 text-xl"></i><br>
-                            Selecciona una fecha arriba
-                        </div>
-                    </div>
-                    <input type="hidden" id="horaSeleccionada">
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-6 mb-8">
@@ -313,13 +293,8 @@
             </p>
         </div>
     </footer>
-
-    <script src="js/db-config.js"></script> 
+ 
     <script src="js/booking.js"></script>   
     <script src="js/main.js"></script>      
 </body>
-
 </html>
-
-
-
